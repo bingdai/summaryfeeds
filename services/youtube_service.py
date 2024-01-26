@@ -3,7 +3,9 @@ import requests
 class YouTubeService:
     BASE_URL = "https://www.googleapis.com/youtube/v3"
 
-    def __init__(self, api_key):
+    def __init__(self, api_key=None):
+        if not api_key:
+            raise ValueError("API key must be provided")
         self.api_key = api_key
 
     def get_video_info(self, video_id):
