@@ -133,3 +133,7 @@ dist
 # test files
 tests/
 todo.txt
+
+# pyenv
+__pycache__
+*.pyc
