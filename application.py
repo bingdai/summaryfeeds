@@ -1,3 +1,4 @@
+from email.mime import application
 from flask import Flask, render_template
 from services.youtube_service import YouTubeService
 #from dotenv import load_dotenv
@@ -17,10 +18,10 @@ api_key = os.getenv('YT_API_KEY')
 if not api_key:
     raise RuntimeError("YT_API_KEY not set")
 
-app = Flask(__name__)
+application = Flask(__name__)
 youtube_service = YouTubeService(api_key=api_key)
 
-@app.route('/')
+@application.route('/')
 def index():
     playlist_ids = [
         'UUGaVdbSav8xWuFWTadK6loA', 
@@ -32,4 +33,4 @@ def index():
     return render_template('index.html', videos=videos)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
