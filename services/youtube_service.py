@@ -16,6 +16,13 @@ class YouTubeService:
         # implement the API call to get channel info
         pass
 
-    def get_latest_videos(self, channel_id, limit=3):
-        # implement the API call to get the latest videos
-        pass
+    def get_latest_videos(self, playlist_id, limit=3):
+        url = f"{self.BASE_URL}/playlistItems"
+        params = {
+            'part': 'snippet,contentDetails',
+            'maxResults': limit,
+            'playlistId': playlist_id,
+            'key': self.api_key
+        }
+        response = requests.get(url, params=params)
+        return response.json()
