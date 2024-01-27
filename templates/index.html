@@ -4,11 +4,11 @@
     <title>Latest YouTube Videos</title>
 </head>
 <body>
-    <h1>Latest Videos from Playlists</h1>
-    {% for playlist_id, playlist_videos in videos.items() %}
-        <h2>Playlist: {{ playlist_id }}</h2>
+    <h1>Latest Videos</h1>
+    {% for channel_title, data in playlists.items() %}
+        <h2><a href="{{ data.url }}">{{ channel_title }}</a></h2>
         <ul>
-            {% for video in playlist_videos['items'] %}
+            {% for video in data.videos['items'] %}
                 <li>
                     <a href="https://www.youtube.com/watch?v={{ video['contentDetails']['videoId'] }}">
                         {{ video['snippet']['title'] }}
