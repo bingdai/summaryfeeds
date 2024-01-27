@@ -137,3 +137,8 @@ todo.txt
 # pyenv
 __pycache__
 *.pyc
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
