@@ -60,3 +60,22 @@ li a:hover {
         font-size: 22px;
     }
 }
+
+.email-container {
+    margin-top: auto;  /* Pushes the footer to the bottom */
+    width: 100%;       /* Full width of the page */
+    height: 50px;      /* Adjusted height */
+    text-align: center; /* Centers the text horizontally */
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f4f6;
+    border-top: 1px solid #ccc;
+    display: flex;      /* Use Flexbox for alignment */
+    justify-content: center; /* Center content horizontally */
+    align-items: center;     /* Center content vertically */
+    padding: 10px 0;   /* Padding for top and bottom */
+}
+
+.divider {
+    margin: 0 10px; /* Adds 10px space on both sides */
+}
