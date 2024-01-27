@@ -1,18 +1,15 @@
 from email.mime import application
 from flask import Flask, render_template
 from services.youtube_service import YouTubeService
-#from dotenv import load_dotenv
 import os
 
-# DEV
-# Load environment variables from .env file
-#load_dotenv()
-
-# Get the API key from the environment variable
-#api_key = os.getenv('YT_API_KEY')
+# DEV: Load environment variables from .env file
+# from dotenv import load_dotenv
+# load_dotenv()
+# api_key = os.getenv('YT_API_KEY')
 
 
-# Get the YouTube API key from the environment variable
+# PROD: Get the YouTube API key from the environment properties
 api_key = os.getenv('YT_API_KEY')
 
 if not api_key:
