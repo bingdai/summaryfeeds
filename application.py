@@ -4,13 +4,13 @@ from services.youtube_service import YouTubeService
 import os
 
 # DEV: Load environment variables from .env file
-# from dotenv import load_dotenv
-# load_dotenv()
-# api_key = os.getenv('YT_API_KEY')
+from dotenv import load_dotenv
+load_dotenv()
+api_key = os.getenv('YT_API_KEY')
 
 
 # PROD: Get the YouTube API key from the environment properties
-api_key = os.getenv('YT_API_KEY')
+# api_key = os.getenv('YT_API_KEY')
 
 if not api_key:
     raise RuntimeError("YT_API_KEY not set")
@@ -35,4 +35,4 @@ def index():
     return render_template('index.html', playlists=playlists)
 
 if __name__ == '__main__':
-    application.run()
+    application.run(debug=True)
