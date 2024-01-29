@@ -7,11 +7,15 @@ import os
 
 # Load environment variables from .env file
 load_dotenv()
+
+# Initialize the Flask application
+application = Flask(__name__)
+
+# Initialize the YouTube service
 api_key = os.getenv('YT_API_KEY')
+print(f'YouTube API key: {api_key}')
 if not api_key:
     raise RuntimeError("YT_API_KEY not set")
-
-application = Flask(__name__)
 youtube_service = YouTubeService(api_key=api_key)
 
 # Initialize the database
