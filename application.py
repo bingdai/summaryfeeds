@@ -13,6 +13,8 @@ if not api_key:
 
 application = Flask(__name__)
 youtube_service = YouTubeService(api_key=api_key)
+
+# Initialize the database
 db = init_db(application)
 
 @application.route('/')
