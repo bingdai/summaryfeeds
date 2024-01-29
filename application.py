@@ -22,7 +22,8 @@ def index():
     playlist_ids = [
         'UUGaVdbSav8xWuFWTadK6loA', 
         'UUcefcZRL2oaA_uBNeo5UOWg',
-        'UUNJ1Ymd5yFuUPtn21xtRbbw'
+        'UUNJ1Ymd5yFuUPtn21xtRbbw',
+        'UUFn4S3OexFT9YhxJ8GWdUYQ'
         ]  # Add your playlist IDs here
     playlists = {}
     for playlist_id in playlist_ids:
