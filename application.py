@@ -1,17 +1,19 @@
 from email.mime import application
 from flask import Flask, render_template
 from services.youtube_service import YouTubeService
+from database.connection import init_db
 from dotenv import load_dotenv
 import os
 
-load_dotenv() # Load environment variables from .env file
+# Load environment variables from .env file
+load_dotenv()
 api_key = os.getenv('YT_API_KEY')
-
 if not api_key:
     raise RuntimeError("YT_API_KEY not set")
 
 application = Flask(__name__)
 youtube_service = YouTubeService(api_key=api_key)
+db = init_db(application)
 
 @application.route('/')
 def index():
