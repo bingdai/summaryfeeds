@@ -1,4 +1,6 @@
 import requests
+from youtube_transcript_api import YouTubeTranscriptApi
+
 
 class YouTubeService:
     BASE_URL = "https://www.googleapis.com/youtube/v3"
@@ -8,14 +10,7 @@ class YouTubeService:
             raise ValueError("API key must be provided")
         self.api_key = api_key
 
-    def get_video_info(self, video_id):
-        # implement the API call to get video info
-        pass
-
-    def get_channel_info(self, channel_id):
-        # implement the API call to get channel info
-        pass
-
+    # get_latest_videos() method
     def get_latest_videos(self, playlist_id, limit=3):
         url = f"{self.BASE_URL}/playlistItems"
         params = {
@@ -26,3 +21,19 @@ class YouTubeService:
         }
         response = requests.get(url, params=params)
         return response.json()
+    
+    # get_video_transcripts() method
+    def get_video_transcripts(self, video_id):
+        try:
+            return YouTubeTranscriptApi.get_transcript(video_id)
+        except Exception as e:
+            print(f"Error fetching transcript: {e}")
+            return None
+        
+    def get_video_info(self, video_id):
+        # implement the API call to get video info
+        pass
+
+    def get_channel_info(self, channel_id):
+        # implement the API call to get channel info
+        pass
