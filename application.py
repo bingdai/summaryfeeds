@@ -1,16 +1,11 @@
 from email.mime import application
 from flask import Flask, render_template
 from services.youtube_service import YouTubeService
+from dotenv import load_dotenv
 import os
 
-# DEV: Load environment variables from .env file
-from dotenv import load_dotenv
-load_dotenv()
+load_dotenv() # Load environment variables from .env file
 api_key = os.getenv('YT_API_KEY')
-
-
-# PROD: Get the YouTube API key from the environment properties
-# api_key = os.getenv('YT_API_KEY')
 
 if not api_key:
     raise RuntimeError("YT_API_KEY not set")
@@ -22,7 +17,8 @@ youtube_service = YouTubeService(api_key=api_key)
 def index():
     playlist_ids = [
         'UUGaVdbSav8xWuFWTadK6loA', 
-        'UUcefcZRL2oaA_uBNeo5UOWg'
+        'UUcefcZRL2oaA_uBNeo5UOWg',
+        'UUNJ1Ymd5yFuUPtn21xtRbbw'
         ]  # Add your playlist IDs here
     playlists = {}
     for playlist_id in playlist_ids:
