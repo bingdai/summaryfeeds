@@ -23,13 +23,12 @@ def init_db(app):
     # Initializing the app with the SQLAlchemy instance
     db.init_app(app)
 
-    # Optional: Test database connection and print tables
+    # Checking if the database connection is successful
     with app.app_context():
         try:
+            db.session.execute(text('SELECT 1'))
             print('Database connection successful!')
-            # result = db.session.execute(text("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"))
-            # tables = [row[0] for row in result]
-            #print('Tables in the database:', tables)
+
         except Exception as e:
             print(f'Error connecting to the database: {e}')
 
