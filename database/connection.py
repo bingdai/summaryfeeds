@@ -26,10 +26,10 @@ def init_db(app):
     # Optional: Test database connection and print tables
     with app.app_context():
         try:
-            result = db.session.execute(text("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"))
-            tables = [row[0] for row in result]
             print('Database connection successful!')
-            print('Tables in the database:', tables)
+            # result = db.session.execute(text("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"))
+            # tables = [row[0] for row in result]
+            #print('Tables in the database:', tables)
         except Exception as e:
             print(f'Error connecting to the database: {e}')
 
