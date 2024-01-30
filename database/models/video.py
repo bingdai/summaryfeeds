@@ -1,4 +1,5 @@
 from database.connection import db
+from database.models.channel import Channel
 
 class Video(db.Model):
     __tablename__ = 'videos'
