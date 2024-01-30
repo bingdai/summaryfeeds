@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from services.youtube_service import YouTubeService
 from database.connection import init_db
 from database.models.channel import Channel
@@ -12,6 +12,9 @@ load_dotenv()
 
 # Initialize the Flask application
 application = Flask(__name__)
+
+# Set the secret key for the application
+application.secret_key = os.getenv('SECRET_KEY')
 
 # Initialize the YouTube service
 api_key = os.getenv('YT_API_KEY')
@@ -55,11 +58,25 @@ def admin():
     # Add authentication here
     return render_template('admin.html')
 
+@application.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == os.getenv('ADMIN_USERNAME') and password == os.getenv('ADMIN_PASSWORD'):
+            session['logged_in'] = True
+            return redirect(url_for('admin_update'))
+        else:
+            return 'Invalid Credentials'
+    return render_template('admin_login.html')
+
 @application.route('/admin/update', methods=['POST'])
 def admin_update():
-    # Placeholder for your update logic    
-    # Redirect back to the admin page or to a confirmation page
-    return redirect(url_for('admin'))
+    if not session.get('logged_in'):
+        return redirect(url_for('admin_login'))
+    # Placeholder for update process
+    return 'Update process started'
+
 
 
 
