@@ -20,6 +20,9 @@
                     <a href="https://www.youtube.com/watch?v={{ video['contentDetails']['videoId'] }}">
                         {{ video['snippet']['title'] }}
                     </a>
+                    <p class="video-date">
+                        Published on {{ video['snippet']['formattedPublishedAt'] }}
+                    </p>
                 </li>
             {% endfor %}
         </ul>
