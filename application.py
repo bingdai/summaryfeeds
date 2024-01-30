@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from services.youtube_service import YouTubeService
 from database.connection import init_db
 from database.models.channel import Channel
@@ -49,6 +49,19 @@ def index():
                 playlists[channel.channel_title] = {'videos': videos, 'url': channel_url}
 
     return render_template('index.html', playlists=playlists)
+
+@application.route('/admin')
+def admin():
+    # Add authentication here
+    return render_template('admin.html')
+
+@application.route('/admin/update', methods=['POST'])
+def admin_update():
+    # Placeholder for your update logic    
+    # Redirect back to the admin page or to a confirmation page
+    return redirect(url_for('admin'))
+
+
 
 if __name__ == '__main__':
     application.run(debug=True)
