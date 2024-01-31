@@ -1,46 +1,53 @@
-from database.models.channel import Channel
+from datetime import datetime
 from database.models.video import Video
 from database.connection import db
-import datetime
+from database.models.channel import Channel
 
 class VideoFetcher:
     def __init__(self, youtube_service):
         self.youtube_service = youtube_service
 
     def fetch_and_store_new_videos(self):
-        # Query all channels (not just featured ones)
         channels = Channel.query.all()
         
         for channel in channels:
-            # Convert channel_id to playlist_id
             playlist_id = 'UU' + channel.channel_id[2:]
-            videos = self.youtube_service.get_latest_videos(playlist_id)
+            videos_response = self.youtube_service.get_latest_videos(playlist_id)
 
-            # Check if videos are found
-            if not videos or 'items' not in videos or not videos['items']:
+            if not videos_response or 'items' not in videos_response or not videos_response['items']:
                 print(f"No videos found for playlist {playlist_id}. Skipping.")
                 continue
 
-            for video_data in videos['items']:
-                # Extract video details
+            for video_data in videos_response['items']:
                 video_id = video_data['contentDetails']['videoId']
-                title = video_data['snippet']['title']
-                description = video_data['snippet']['description']
-                published_at = datetime.datetime.strptime(
-                    video_data['snippet']['publishedAt'], '%Y-%m-%dT%H:%M:%SZ'
-                )
+                video_info = self.youtube_service.get_video_info(video_id)
 
-                # Check if video already exists
+                if not video_info:
+                    print(f"No detailed info for video {video_id}")
+                    continue
+
+                default_language = video_info['snippet'].get('defaultLanguage')
+                default_audio_language = video_info['snippet'].get('defaultAudioLanguage')
+                duration = video_info['contentDetails'].get('duration')
+                caption = video_info['contentDetails'].get('caption') == 'true'
+                privacy_status = video_info['status'].get('privacyStatus')
+                made_for_kids = video_info['status'].get('madeForKids', False)
+
                 existing_video = Video.query.filter_by(video_id=video_id).first()
                 if not existing_video:
-                    # Create new Video instance
                     new_video = Video(
                         video_id=video_id,
-                        title=title,
-                        description=description,
-                        published_at=published_at
-                    ) # type: ignore
+                        title=video_info['snippet']['title'],
+                        description=video_info['snippet']['description'],
+                        published_at=datetime.strptime(video_info['snippet']['publishedAt'], '%Y-%m-%dT%H:%M:%SZ'),
+                        channel_id=video_info['snippet']['channelId'],
+                        default_language=default_language,
+                        default_audio_language=default_audio_language,
+                        duration=duration,
+                        caption=caption,
+                        privacy_status=privacy_status,
+                        made_for_kids=made_for_kids
+                    )
                     db.session.add(new_video)
 
         db.session.commit()
-
