@@ -11,6 +11,7 @@ class VideoSummary(db.Model):
     summary = db.Column(db.Text)
     prompt = db.Column(db.Text)
     retrieved_at = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(50), default='pending')
 
     # Establish a relationship to the Video model
     video = db.relationship('Video', backref=db.backref('summaries', lazy=True))
