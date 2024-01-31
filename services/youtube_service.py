@@ -37,6 +37,7 @@ class YouTubeService:
             print(f"Error fetching transcript: {e}")
             return None
     
+    # get_video_info() method
     def get_video_info(self, video_id):
         url = f"{self.BASE_URL}/videos"
         params = {
