@@ -143,3 +143,4 @@ __pycache__
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 test_channel_model.py
+doc.txt
