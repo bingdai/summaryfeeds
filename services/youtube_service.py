@@ -3,8 +3,6 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from dotenv import load_dotenv
 import os
 load_dotenv()
-# Initialize the YouTube service
-
 
 class YouTubeService:
     BASE_URL = "https://www.googleapis.com/youtube/v3"
@@ -29,14 +27,6 @@ class YouTubeService:
             return None
         return response.json()
     
-    # get_video_transcripts() method
-    def get_video_transcripts(self, video_id):
-        try:
-            return YouTubeTranscriptApi.get_transcript(video_id)
-        except Exception as e:
-            print(f"Error fetching transcript: {e}")
-            return None
-    
     # get_video_info() method
     def get_video_info(self, video_id):
         url = f"{self.BASE_URL}/videos"
@@ -55,11 +45,14 @@ class YouTubeService:
             return None
         # Assuming single video ID, so we take the first item.
         return video_info[0]
-
-
-    def get_channel_info(self, channel_id):
-        # implement the API call to get channel info
-        pass
+    
+    # get_video_transcripts() method
+    def get_video_transcripts(self, video_id):
+        try:
+            return YouTubeTranscriptApi.get_transcript(video_id)
+        except Exception as e:
+            print(f"Error fetching transcript: {e}")
+            return None
 
 if __name__ == "__main__":
 
