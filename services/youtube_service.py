@@ -20,6 +20,9 @@ class YouTubeService:
             'key': self.api_key
         }
         response = requests.get(url, params=params)
+        if response.status_code != 200:
+            print(f"Error fetching videos for playlist {playlist_id}: {response.json()}")
+            return None
         return response.json()
     
     # get_video_transcripts() method
