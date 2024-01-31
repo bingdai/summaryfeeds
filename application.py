@@ -41,7 +41,7 @@ def index():
     for channel in featured_channels:
         playlist_id = 'UU' + channel.channel_id[2:]  # Convert channel_id to playlist_id
         videos = youtube_service.get_latest_videos(playlist_id)
-        if videos['items']:
+        if videos is not None and videos['items']:
             channel_url = f"https://www.youtube.com/channel/{channel.channel_id}"
             # Convert each video's publishedAt to Pacific Timezone
             for video in videos['items']:
