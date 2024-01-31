@@ -1,5 +1,9 @@
 import requests
 from youtube_transcript_api import YouTubeTranscriptApi
+from dotenv import load_dotenv
+import os
+load_dotenv()
+# Initialize the YouTube service
 
 
 class YouTubeService:
@@ -55,3 +59,13 @@ class YouTubeService:
     def get_channel_info(self, channel_id):
         # implement the API call to get channel info
         pass
+
+if __name__ == "__main__":
+
+    # Load environment variables from .env file
+    api_key = os.getenv('YT_API_KEY')  # Replace with your actual API key
+    youtube_service = YouTubeService(api_key=api_key)
+
+    # Test get_video_info() method
+    video_info = youtube_service.get_video_info(video_id='j48Z7dqBcWM')  # Replace VIDEO_ID with an actual video ID
+    print(video_info)
