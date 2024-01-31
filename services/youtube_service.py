@@ -32,10 +32,25 @@ class YouTubeService:
         except Exception as e:
             print(f"Error fetching transcript: {e}")
             return None
-        
+    
     def get_video_info(self, video_id):
-        # implement the API call to get video info
-        pass
+        url = f"{self.BASE_URL}/videos"
+        params = {
+            'part': 'snippet,contentDetails,status',
+            'id': video_id,
+            'key': self.api_key
+        }
+        response = requests.get(url, params=params)
+        if response.status_code != 200:
+            print(f"Error fetching video info for video ID {video_id}: {response.json()}")
+            return None
+        video_info = response.json().get('items', [])
+        if not video_info:
+            print(f"No video info found for video ID {video_id}")
+            return None
+        # Assuming single video ID, so we take the first item.
+        return video_info[0]
+
 
     def get_channel_info(self, channel_id):
         # implement the API call to get channel info
