@@ -20,13 +20,6 @@ youtube_service = YouTubeService(api_key=Config.YT_API_KEY)
 # Initialize the database
 db = init_db(application)
 
-def convert_to_pacific_time(time_str):
-    #Convert UTC time string to Pacific Timezone and return date part
-    utc_time = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ')
-    pacific_timezone = pytz.timezone('America/Los_Angeles')
-    pacific_time = utc_time.astimezone(pacific_timezone)
-    return pacific_time.strftime('%Y-%m-%d')
-
 @application.route('/')
 def index():
     # Query featured channels
