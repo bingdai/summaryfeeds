@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Summary Feeds{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts links -->
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Summary Feeds</a></h1>
+    </header>
+    
+    <main>
+        {% block content %}
+        <!-- Default content goes here if not overridden -->
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <div class="email-container">
+            Made by Bing Dai in Vancouver
+            <span class="divider">|||</span>
+            <a href="mailto:summaryfeeds@gmail.com">Contact</a>
+            <span class="divider">|||</span>
+            <a href="https://github.com/bingdai/summaryfeeds">Source Code</a>
+        </div>
+    </footer>
+</body>
+</html>
