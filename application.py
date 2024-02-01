@@ -1,26 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from services.youtube_service import YouTubeService
+from config import Config
 from database.connection import init_db
 from database.models.channel import Channel
 from datetime import datetime
 import pytz
 import os
 
-# Load environment variables from .env file
-from dotenv import load_dotenv
-load_dotenv()
-
 # Initialize the Flask application
 application = Flask(__name__)
 
-# Set the secret key for the application
-application.secret_key = os.getenv('SECRET_KEY')
+# Load environment variables
+application.config.from_object(Config)
 
-# Initialize the YouTube service
-api_key = os.getenv('YT_API_KEY')
-if not api_key:
+if not Config.YT_API_KEY:
     raise RuntimeError("YT_API_KEY not set")
-youtube_service = YouTubeService(api_key=api_key)
+youtube_service = YouTubeService(api_key=Config.YT_API_KEY)
 
 # Initialize the database
 db = init_db(application)
