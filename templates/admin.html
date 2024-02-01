@@ -9,10 +9,13 @@
         {% for video in videos %}
             <li>
                 {{ video.title }}
-                <!-- Placeholder Fetch Transcript Buttons-->
-                <form method="post">
+                <!-- Fetch Transcript Button -->
+                <form action="{{ url_for('fetch_transcript') }}" method="post">
+                    <!-- Ensure this input exists and its name attribute is set to 'video_id' -->
+                    <input type="hidden" name="video_id" value="{{ video.id }}">
                     <input type="submit" value="Fetch Transcript">
                 </form>
+
             </li>
         {% endfor %}
         </ul>
