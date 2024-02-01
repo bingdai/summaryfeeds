@@ -79,8 +79,23 @@ def admin_update():
     # Placeholder for update process
     return 'Update process started'
 
+@application.route('/admin/fetch_transcript', methods=['POST'])
+def fetch_transcript():
+    if not session.get('logged_in'):
+        return redirect(url_for('admin_login'))
+    
+    video_id = request.form.get('video_id')
+    #video_id = 'Zc03IYnnuIA'
 
-
+    if video_id:
+        # Initialize transcript fetching and storing service
+        transcript_service = TranscriptService()
+        transcript_fetcher_and_storer = TranscriptFetcherAndStorer(transcript_service)
+        transcript_fetcher_and_storer.fetch_and_store_transcript(video_id)
+        # Provide feedback or redirect as needed
+        return f"Transcript fetched and stored for video ID {video_id}"
+    else:
+        return "Video ID missing", 400
 
 if __name__ == '__main__':
     application.run(debug=True)
