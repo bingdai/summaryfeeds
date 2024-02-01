@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Interface</title>
-</head>
-<body>
-    <h1>Admin Dashboard</h1>
-    <form action="/admin/update" method="post">
-        <input type="submit" value="Update Video Summaries">
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Admin - Summary Feeds{% endblock %}
+{% block content %}
+<div class="admin-container">
+    <h2>Featured Videos</h2>
+    {% for channel, videos in featured_videos.items() %}
+        <h3>{{ channel }}</h3>
+        <ul>
+        {% for video in videos %}
+            <li>
+                {{ video.title }}
+                <!-- Placeholder Fetch Transcript Buttons-->
+                <form method="post">
+                    <input type="submit" value="Fetch Transcript">
+                </form>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endfor %}
+</div>
+{% endblock %}

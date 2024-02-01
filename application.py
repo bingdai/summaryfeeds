@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from services.youtube_service import YouTubeService
+from services.transcript_service import TranscriptService
+from services.transcript_fetcher_and_storer import TranscriptFetcherAndStorer
 from config import Config
 from database.connection import init_db
 from database.models.channel import Channel
@@ -43,8 +45,20 @@ def index():
 
 @application.route('/admin')
 def admin():
-    # Add authentication here
-    return render_template('admin.html')
+    if not session.get('logged_in'):
+        return redirect(url_for('admin_login'))
+
+    # Fetch featured channels and their videos
+    featured_channels = Channel.query.filter_by(featured=True).all()
+    featured_videos = {}
+    for channel in featured_channels:
+        playlist_id = 'UU' + channel.channel_id[2:]
+        videos_response = youtube_service.get_latest_videos(playlist_id)
+        if videos_response and 'items' in videos_response:
+            videos = videos_response['items']
+            featured_videos[channel.channel_title] = [{'id': video['contentDetails']['videoId'], 'title': video['snippet']['title']} for video in videos]
+    
+    return render_template('admin.html', featured_videos=featured_videos)    
 
 @application.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
