@@ -79,3 +79,20 @@ li a:hover {
 .divider {
     margin: 0 10px; /* Adds 10px space on both sides */
 }
+
+/* Additional CSS for Flash Messages */
+.flash-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+}
+
+.flash-message.success {
+    background-color: #2ecc71;
+}
+
+.flash-message.error {
+    background-color: #e74c3c;
+}
