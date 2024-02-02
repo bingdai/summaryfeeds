@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, flash, render_template, request, redirect, url_for, session
 from services.youtube_service import YouTubeService
 from services.transcript_service import TranscriptService
-from services.transcript_fetcher_and_storer import TranscriptFetcherAndStorer
+from database.models.video_summary import VideoSummary
+from services.summary_generator import SummaryGenerator
 from config import Config
-from database.connection import init_db
+from database.connection import init_db, db
 from database.models.channel import Channel
 from datetime import datetime
 import pytz
@@ -85,17 +86,58 @@ def fetch_transcript():
         return redirect(url_for('admin_login'))
     
     video_id = request.form.get('video_id')
-    #video_id = 'Zc03IYnnuIA'
 
     if video_id:
-        # Initialize transcript fetching and storing service
         transcript_service = TranscriptService()
-        transcript_fetcher_and_storer = TranscriptFetcherAndStorer(transcript_service)
-        transcript_fetcher_and_storer.fetch_and_store_transcript(video_id)
-        # Provide feedback or redirect as needed
-        return f"Transcript fetched and stored for video ID {video_id}"
+        transcript_text = transcript_service.get_or_fetch_transcript(video_id)
+
+        if transcript_text:
+            flash('Transcript fetched and stored successfully.', 'success')
+        else:
+            flash('Failed to fetch transcript.', 'error')
     else:
-        return "Video ID missing", 400
+        flash('Video ID missing.', 'error')
+
+    return redirect(url_for('admin'))
+
+@application.route('/admin/generate_summary/<video_id>', methods=['POST'])
+def generate_summary(video_id):
+    if not session.get('logged_in'):
+        return redirect(url_for('admin_login'))
+
+    transcript_service = TranscriptService()
+
+    # Attempt to retrieve the transcript from the database first
+    transcript_text = transcript_service.get_or_fetch_transcript(video_id)
+
+    #print(f"Transcript for video {video_id}: {transcript_text}")
+
+    # Check if transcript was successfully retrieved or stored
+    if not transcript_text:
+        flash('Unable to retrieve or generate transcript for video.', 'error')
+        return redirect(url_for('admin'))
+
+    # Generate summary if transcript is available
+    prompt = "Summarize the following transcript into a concise paragraph."
+    summary_generator = SummaryGenerator(api_key=Config.OPENAI_API_KEY)
+    summary_text = summary_generator.generate_summary(video_id, transcript_text)
+
+    if summary_text:
+        new_summary = VideoSummary(
+            video_id=video_id,
+            summary=summary_text,
+            prompt=prompt,
+            retrieved_at=datetime.utcnow(),
+            status='completed'
+        )
+        db.session.add(new_summary)
+        db.session.commit()
+        flash('Summary generated and stored successfully.', 'success')
+    else:
+        flash('Failed to generate summary. Please try again later.', 'error')
+
+    return redirect(url_for('admin'))
+
 
 if __name__ == '__main__':
     application.run(debug=True)
