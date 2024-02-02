@@ -12,6 +12,11 @@
                     <p class="video-date">
                         Published on {{ video['snippet']['formattedPublishedAt'] }}
                     </p>
+                    {% if video.summaries %}
+                        <p class="video-summary">
+                            Summary: {{ video.summaries[0].summary }}
+                        </p>
+                {% endif %}
                 </li>
             {% endfor %}
         </ul>
