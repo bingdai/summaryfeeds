@@ -96,3 +96,9 @@ li a:hover {
 .flash-message.error {
     background-color: #e74c3c;
 }
+
+.video-summary {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
