@@ -36,6 +36,13 @@ def index():
             channel_url = f"https://www.youtube.com/channel/{channel.channel_id}"
             # Convert each video's publishedAt to Pacific Timezone
             for video in videos['items']:
+                video_id = video['contentDetails']['videoId']
+                # Fetch the latest summary for each video if it exists
+                summary = VideoSummary.query.filter_by(video_id=video_id).order_by(VideoSummary.retrieved_at.desc()).first()
+                if summary:
+                    video['summaries'] = [summary]
+                else:
+                    video['summaries'] = []
                 pacific = pytz.timezone('US/Pacific')
                 published_at = datetime.fromisoformat(video['snippet']['publishedAt'][:-1])
                 local_published_at = published_at.astimezone(pacific)
