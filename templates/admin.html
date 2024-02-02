@@ -19,12 +19,14 @@
             <li>
                 {{ video.title }}
                 <!-- Fetch Transcript Button -->
-                <form action="{{ url_for('fetch_transcript') }}" method="post">
-                    <!-- Ensure this input exists and its name attribute is set to 'video_id' -->
+                <form action="{{ url_for('fetch_transcript') }}" method="post" style="display: inline;">
                     <input type="hidden" name="video_id" value="{{ video.id }}">
                     <input type="submit" value="Fetch Transcript">
                 </form>
-
+                <!-- Generate Summary Button -->
+                <form action="{{ url_for('generate_summary', video_id=video.id) }}" method="post" style="display: inline;">
+                    <input type="submit" value="Generate Summary">
+                </form>
             </li>
         {% endfor %}
         </ul>
