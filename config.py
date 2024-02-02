@@ -8,3 +8,4 @@ load_dotenv()
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
     YT_API_KEY = os.getenv('YT_API_KEY')
+    OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
