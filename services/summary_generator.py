@@ -17,7 +17,7 @@ class SummaryGenerator:
         payload = {
             "model": "gpt-3.5-turbo-16k",
             "messages": [
-                {"role": "system", "content": "You are a helpful assistant that summarizes video transcripts into one paragraph."},
+                {"role": "system", "content": "You are a helpful assistant that summarizes video transcripts into one or two paragraphs, using a maximum 130 words."},
                 {"role": "user", "content": transcript}
             ]
         }
