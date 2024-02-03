@@ -20,9 +20,17 @@ body {
 .tagline {
     font-size: 20px; /* Adjusted for visibility */
     text-align: center;
-    margin-bottom: 20px; /* Space before listing channels */
+    margin-bottom: 40px; /* Space before listing channels */
     color: #555; /* Subtle, professional color */
 }
+
+.tagline-divider {
+    width: 60%; /* Adjust width as needed */
+    height: 2px;
+    background-color: #ccc;
+    margin: 0 auto 40px; /* Center divider and add space below */
+}
+
 
 /* Add a max-width to the main content container */
 .content {
@@ -49,8 +57,8 @@ h1 {
 
 h2 {
     font-family: 'Lato', sans-serif;
-    font-size: 24px; /* Increased font size */
-    margin-top: 40px; /* Increased margin */
+    font-size: 22px; /* Increased font size */
+    margin-top: 20px; /* Increased margin */
     margin-bottom: 20px; /* Increased margin */
     text-align: center;
     color:#444
