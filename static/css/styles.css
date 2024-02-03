@@ -2,48 +2,58 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f2f4f6;
-    line-height: 1.6;
+    background-color: #fafafa;
+    line-height: 1.8; /* Increased line height for better readability */
     margin: 0;
     padding: 20px;
     font-family: 'Roboto', sans-serif;
+    font-size: 16px; /* Adjusted for better readability */
+    color: #333; /* Darker text for better contrast */
 }
 
 h1 {
-    font-family: 'Bitter';
-    font-size: 48px;
-    margin-bottom: 10px;
+    font-family: 'Bitter', serif;
+    font-size: 36px; /* Increased font size */
+    margin-bottom: 20px; /* Increased margin */
     text-align: center;
+    color: #222; /* Darker color for headline */
 }
 
 h2 {
     font-family: 'Lato', sans-serif;
-    font-size: 25px;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    font-size: 24px; /* Increased font size */
+    margin-top: 40px; /* Increased margin */
+    margin-bottom: 20px; /* Increased margin */
     text-align: center;
+    color:#444
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+    margin-bottom: 40px; /* Added margin */
 }
 
 li {
-    background-color: #f9f9f9;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
+    background-color: #ffffff;
+    margin-bottom: 15px; /* Increased margin */
+    padding: 20px; /* Increased padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s; /* Smooth transition for hover effect */
 }
+
+/* ... rest of your CSS ... */
 
 li a {
     color: #3498db;
     text-decoration: none;
-    transition: color 0.3s;
+    font-weight: bold; /* Make links stand out more */
 }
 
 li a:hover {
     color: #2980b9;
+    transform: translateY(-5px); /* Slight lift effect on hover */
 }
 
 @media only screen and (max-width: 768px) {
@@ -62,43 +72,36 @@ li a:hover {
 }
 
 .email-container {
-    margin-top: auto;  /* Pushes the footer to the bottom */
-    width: 100%;       /* Full width of the page */
-    height: 50px;      /* Adjusted height */
-    text-align: center; /* Centers the text horizontally */
-    font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f2f4f6;
-    border-top: 1px solid #ccc;
-    display: flex;      /* Use Flexbox for alignment */
-    justify-content: center; /* Center content horizontally */
-    align-items: center;     /* Center content vertically */
-    padding: 10px 0;   /* Padding for top and bottom */
+    margin-top: auto;
+    width: 100%;
+    padding: 20px 0; /* More padding for a taller footer */
+    text-align: center;
+    background-color: #f2f4f6; /* Match the page background */
+    border-top: 2px solid #eee; /* Subtle separation from content */
 }
 
 .divider {
-    margin: 0 10px; /* Adds 10px space on both sides */
-}
+    margin: 0 15px; /* More space around divider for clarity */
+    color: #ccc; /* Lighter color for a less intrusive divider */}
 
 /* Additional CSS for Flash Messages */
 .flash-message {
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    color: #fff;
-    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px; /* More space below messages */
+    border-radius: 8px; /* Consistent with other elements */
+    font-size: 16px; /* Larger text for messages */
 }
 
 .flash-message.success {
-    background-color: #2ecc71;
+    background-color: #27ae60; /* Softer green */
 }
 
 .flash-message.error {
-    background-color: #e74c3c;
+    background-color: #c0392b; /* Softer red */
 }
 
 .video-summary {
-    font-size: 14px;
-    color: #555;
-    margin-top: 5px;
+    font-size: 16px; /* Larger for readability */
+    color: #666; /* Darker for contrast */
+    margin-top: 10px;
 }
