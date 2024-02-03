@@ -30,6 +30,7 @@ class SummaryGenerator:
                 return summary
             else:
                 print(f"Failed to generate summary, status code: {response.status_code}")
+                print(f"Response: {response.json()}")
                 return None
         except requests.exceptions.RequestException as e:
             print(f"Request failed for {video_id}: {e}")
