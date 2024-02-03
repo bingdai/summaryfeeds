@@ -6,7 +6,7 @@
         Concise Summaries of YouTube Tech Channels
     </div>
     {% for channel_title, data in playlists.items() %}
-        <h2><a href="{{ data.url }}">{{ channel_title }}</a></h2>
+        <h2>{{ channel_title }}</h2>
         <ul>
             {% for video in data.videos['items'] %}
                 <li>
