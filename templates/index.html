@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Home - Summary Feeds{% endblock %}
 {% block content %}
+<div class="content"> <!-- Container to control content width -->
     {% for channel_title, data in playlists.items() %}
         <h2><a href="{{ data.url }}">{{ channel_title }}</a></h2>
         <ul>
@@ -21,4 +22,5 @@
             {% endfor %}
         </ul>
     {% endfor %}
+</div>
 {% endblock %}

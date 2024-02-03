@@ -1,3 +1,8 @@
+/* Add a general padding and box-sizing to make sure elements fit well */
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -5,10 +10,26 @@ body {
     background-color: #fafafa;
     line-height: 1.8; /* Increased line height for better readability */
     margin: 0;
-    padding: 20px;
+    padding: 0 20px; /* Adjust padding for the entire body */
     font-family: 'Roboto', sans-serif;
     font-size: 16px; /* Adjusted for better readability */
     color: #333; /* Darker text for better contrast */
+    align-items: center; /* Center children horizontally */
+}
+
+/* Add a max-width to the main content container */
+.content {
+    max-width: 800px; /* Adjust this value to control the content width */
+    width: 100%; /* Make sure it occupies full width within the max-width */
+    padding: 20px; /* Padding inside the container */
+    margin: 0 auto; /* Center the container */
+}
+
+h1, h2, .email-container {
+    width: 100%; /* Ensure full width to align with the container */
+    max-width: 800px; /* Match the max-width of the content for alignment */
+    margin-left: auto; /* Center the element */
+    margin-right: auto; /* Center the element */
 }
 
 h1 {
@@ -26,6 +47,15 @@ h2 {
     margin-bottom: 20px; /* Increased margin */
     text-align: center;
     color:#444
+}
+
+.email-container {
+    margin-top: auto;
+    width: 100%;
+    padding: 20px 0; /* More padding for a taller footer */
+    text-align: center;
+    background-color: #f2f4f6; /* Match the page background */
+    border-top: 2px solid #eee; /* Subtle separation from content */
 }
 
 ul {
@@ -69,15 +99,6 @@ li a:hover {
     h2 {
         font-size: 22px;
     }
-}
-
-.email-container {
-    margin-top: auto;
-    width: 100%;
-    padding: 20px 0; /* More padding for a taller footer */
-    text-align: center;
-    background-color: #f2f4f6; /* Match the page background */
-    border-top: 2px solid #eee; /* Subtle separation from content */
 }
 
 .divider {
