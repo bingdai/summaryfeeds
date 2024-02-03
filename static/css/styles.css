@@ -17,6 +17,13 @@ body {
     align-items: center; /* Center children horizontally */
 }
 
+.tagline {
+    font-size: 20px; /* Adjusted for visibility */
+    text-align: center;
+    margin-bottom: 20px; /* Space before listing channels */
+    color: #555; /* Subtle, professional color */
+}
+
 /* Add a max-width to the main content container */
 .content {
     max-width: 800px; /* Adjust this value to control the content width */
