@@ -23,6 +23,11 @@ youtube_service = YouTubeService(api_key=Config.YT_API_KEY)
 # Initialize the database
 db = init_db(application)
 
+# Make GA_TRACKING_ID available in all templates
+@application.context_processor
+def inject_ga_id():
+    return dict(GA_TRACKING_ID=os.getenv('GA_TRACKING_ID'))
+
 @application.route('/')
 def index():
     # Query featured channels
