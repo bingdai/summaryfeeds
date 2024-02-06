@@ -5,6 +5,7 @@ from services.youtube_service import YouTubeService
 from services.transcript_service import TranscriptService
 from database.models.video import Video
 from database.models.video_summary import VideoSummary
+from database.models.channel import Channel
 from services.summary_generator import SummaryGenerator
 from config import Config
 from database.connection import init_db, db
@@ -33,19 +34,21 @@ def inject_ga_id():
 
 @application.route('/')
 def index():
-    # Fetch all videos with their latest summary, ensuring only videos with summaries and from featured channels are considered
+    # Extend the query to also select channel information
     video_summary_query = db.session.query(
         Video.video_id,
         Video.title,
         func.to_char(Video.published_at, 'YYYY-MM-DD').label('published_at'),
         VideoSummary.summary,
+        Channel.channel_title,
+        Channel.channel_logo_url,  
         func.rank().over(
             partition_by=Video.video_id,
             order_by=VideoSummary.retrieved_at.desc()
         ).label('rank')
-    ).join(Channel, Video.channel_id == Channel.channel_id)\
-    .join(VideoSummary, Video.video_id == VideoSummary.video_id)\
-    .filter(Channel.featured == True)\
+    ).join(Channel, Video.channel_id == Channel.channel_id) \
+    .join(VideoSummary, Video.video_id == VideoSummary.video_id) \
+    .filter(Channel.featured == True) \
     .subquery()
 
     # Fetch the latest summaries
@@ -53,19 +56,23 @@ def index():
         video_summary_query.c.video_id,
         video_summary_query.c.title,
         video_summary_query.c.published_at,
-        video_summary_query.c.summary
-    ).filter(video_summary_query.c.rank == 1)\
-    .order_by(video_summary_query.c.published_at.desc())\
+        video_summary_query.c.summary,
+        video_summary_query.c.channel_title,
+        video_summary_query.c.channel_logo_url
+    ).filter(video_summary_query.c.rank == 1) \
+    .order_by(video_summary_query.c.published_at.desc()) \
     .all()
 
-    # Group videos by their publication date in UTC
+    # Adjust the structure to include channel info
     daily_videos = defaultdict(list)
-    for video_id, title, published_at, summary in latest_summaries:
+    for video_id, title, published_at, summary, channel_title, channel_logo_url in latest_summaries:
         daily_videos[published_at].append({
             'video_id': video_id,
             'title': title,
-            'published_at': published_at,  # Already a string formatted as 'YYYY-MM-DD'
-            'summary': summary
+            'published_at': published_at,
+            'summary': summary,
+            'channel_title': channel_title,
+            'channel_logo_url': channel_logo_url
         })
 
     return render_template('index.html', daily_videos=daily_videos)

@@ -8,8 +8,11 @@
         <h2>{{ date }}</h2>
         <ul>
             {% for video in videos %}
-                <li>
-                    <a href="https://www.youtube.com/watch?v={{ video['video_id'] }}">{{ video['title'] }}</a>
+            <li>
+                <div class="channel-info">
+                    <img src="{{ video['channel_logo_url'] }}" alt="{{ video['channel_title'] }} logo" class="channel-logo">
+                </div>                
+                <a href="https://www.youtube.com/watch?v={{ video['video_id'] }}">{{ video['title'] }}</a>
                 <p class="video-summary">{{ video['summary'] }}</p>
             </li>
             {% endfor %}
