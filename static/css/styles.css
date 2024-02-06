@@ -93,13 +93,13 @@ li {
 /* ... rest of your CSS ... */
 
 li a {
-    color: #3498db;
+    color: #2a6496;
     text-decoration: none;
     font-weight: bold; /* Make links stand out more */
 }
 
 li a:hover {
-    color: #2980b9;
+    color: #1d4d70;
     transform: translateY(-5px); /* Slight lift effect on hover */
 }
 
@@ -140,6 +140,6 @@ li a:hover {
 
 .video-summary {
     font-size: 16px; /* Larger for readability */
-    color: #666; /* Darker for contrast */
+    color: #444; /* Darker for contrast */
     margin-top: 10px;
 }
