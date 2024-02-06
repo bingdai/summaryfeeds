@@ -111,12 +111,15 @@ li {
 }
 
 li a {
+    display: inline-block; /* Allow padding and background color */
+    background-color: #f0f8ff; /* Light background color */
+    padding: 5px 10px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners for the background */
     color: #2a6496;
     text-decoration: none;
     font-weight: bold; /* Make links stand out more */
     font-size: 18px;
     width: 100%; /* Ensures the link occupies the full width for better clickability */
-    display: block; /* Make the anchor tag behave as a block element */
     text-align: center; /* Center-align the text of the anchor tag */
     margin-bottom: 10px; /* Optional: Adds some space between the title and the summary */
 }
