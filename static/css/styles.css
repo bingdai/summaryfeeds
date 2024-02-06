@@ -88,6 +88,7 @@ li {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
     transition: transform 0.2s; /* Smooth transition for hover effect */
+    text-align: center; /* Center-aligns the content of li */
 }
 
 /* ... rest of your CSS ... */
@@ -96,11 +97,13 @@ li a {
     color: #2a6496;
     text-decoration: none;
     font-weight: bold; /* Make links stand out more */
+    display: inline-block; /* This makes the text-align: center on li effective for the anchor */
+    width: 100%; /* Ensures the link occupies the full width for better clickability */
 }
 
 li a:hover {
     color: #1d4d70;
-    transform: translateY(-5px); /* Slight lift effect on hover */
+    transform: translateY(-1px); /* Slight lift effect on hover */
 }
 
 @media only screen and (max-width: 768px) {
