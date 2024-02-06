@@ -1,6 +1,9 @@
 from flask import Flask, flash, render_template, request, redirect, url_for, session
+from sqlalchemy import func
+from collections import defaultdict
 from services.youtube_service import YouTubeService
 from services.transcript_service import TranscriptService
+from database.models.video import Video
 from database.models.video_summary import VideoSummary
 from services.summary_generator import SummaryGenerator
 from config import Config
@@ -30,31 +33,42 @@ def inject_ga_id():
 
 @application.route('/')
 def index():
-    # Query featured channels
-    featured_channels = Channel.query.filter_by(featured=True).all()
-    playlists = {}
-    
-    for channel in featured_channels:
-        playlist_id = 'UU' + channel.channel_id[2:]  # Convert channel_id to playlist_id
-        videos = youtube_service.get_latest_videos(playlist_id)
-        if videos is not None and videos['items']:
-            channel_url = f"https://www.youtube.com/channel/{channel.channel_id}"
-            # Convert each video's publishedAt to Pacific Timezone
-            for video in videos['items']:
-                video_id = video['contentDetails']['videoId']
-                # Fetch the latest summary for each video if it exists
-                summary = VideoSummary.query.filter_by(video_id=video_id).order_by(VideoSummary.retrieved_at.desc()).first()
-                if summary:
-                    video['summaries'] = [summary]
-                else:
-                    video['summaries'] = []
-                pacific = pytz.timezone('US/Pacific')
-                published_at = datetime.fromisoformat(video['snippet']['publishedAt'][:-1])
-                local_published_at = published_at.astimezone(pacific)
-                video['snippet']['formattedPublishedAt'] = local_published_at.strftime('%Y-%m-%d')            
-                playlists[channel.channel_title] = {'videos': videos, 'url': channel_url}
+    # Fetch all videos with their latest summary, ensuring only videos with summaries and from featured channels are considered
+    video_summary_query = db.session.query(
+        Video.video_id,
+        Video.title,
+        func.to_char(Video.published_at, 'YYYY-MM-DD').label('published_at'),
+        VideoSummary.summary,
+        func.rank().over(
+            partition_by=Video.video_id,
+            order_by=VideoSummary.retrieved_at.desc()
+        ).label('rank')
+    ).join(Channel, Video.channel_id == Channel.channel_id)\
+    .join(VideoSummary, Video.video_id == VideoSummary.video_id)\
+    .filter(Channel.featured == True)\
+    .subquery()
 
-    return render_template('index.html', playlists=playlists)
+    # Fetch the latest summaries
+    latest_summaries = db.session.query(
+        video_summary_query.c.video_id,
+        video_summary_query.c.title,
+        video_summary_query.c.published_at,
+        video_summary_query.c.summary
+    ).filter(video_summary_query.c.rank == 1)\
+    .order_by(video_summary_query.c.published_at.desc())\
+    .all()
+
+    # Group videos by their publication date in UTC
+    daily_videos = defaultdict(list)
+    for video_id, title, published_at, summary in latest_summaries:
+        daily_videos[published_at].append({
+            'video_id': video_id,
+            'title': title,
+            'published_at': published_at,  # Already a string formatted as 'YYYY-MM-DD'
+            'summary': summary
+        })
+
+    return render_template('index.html', daily_videos=daily_videos)
 
 @application.route('/admin')
 def admin():
