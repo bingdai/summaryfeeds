@@ -88,7 +88,6 @@ li {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
     transition: transform 0.2s; /* Smooth transition for hover effect */
-    text-align: center; /* Center-aligns the content of li */
 }
 
 /* ... rest of your CSS ... */
@@ -97,8 +96,10 @@ li a {
     color: #2a6496;
     text-decoration: none;
     font-weight: bold; /* Make links stand out more */
-    display: inline-block; /* This makes the text-align: center on li effective for the anchor */
     width: 100%; /* Ensures the link occupies the full width for better clickability */
+    display: block; /* Make the anchor tag behave as a block element */
+    text-align: center; /* Center-align the text of the anchor tag */
+    margin-bottom: 10px; /* Optional: Adds some space between the title and the summary */
 }
 
 li a:hover {
@@ -143,6 +144,7 @@ li a:hover {
 
 .video-summary {
     font-size: 15px; /* Larger for readability */
-    color: #444; /* Darker for contrast */
+    color: #333; /* Darker for contrast */
     margin-top: 10px;
+    text-align: left; /* Left-align the summary */
 }
