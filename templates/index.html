@@ -1,27 +1,16 @@
 {% extends "base.html" %}
 {% block title %}Home - Summary Feeds{% endblock %}
 {% block content %}
-<div class="content"> <!-- Container to control content width -->
-    <div class="tagline">
-        Daily Summaries of the Latest AI-Focused YouTube Videos
-    </div>
+<div class="content">
+    <div class="tagline">Daily Summaries of the Latest AI-Focused YouTube Videos</div>
     <div class="tagline-divider"></div>
-    {% for channel_title, data in playlists.items() %}
-        <h2>{{ channel_title }}</h2>
+    {% for date, videos in daily_videos.items() %}
+        <h2>{{ date }}</h2>
         <ul>
-            {% for video in data.videos['items'] %}
+            {% for video in videos %}
                 <li>
-                    <a href="https://www.youtube.com/watch?v={{ video['contentDetails']['videoId'] }}">
-                        {{ video['snippet']['title'] }}
-                    </a>
-                    <p class="video-date">
-                        {{ video['snippet']['formattedPublishedAt'] }}
-                    </p>
-                    {% if video.summaries %}
-                        <p class="video-summary">
-                            Summary: {{ video.summaries[0].summary }}
-                        </p>
-                {% endif %}
+                    <a href="https://www.youtube.com/watch?v={{ video['video_id'] }}">{{ video['title'] }}</a>
+                    <p class="video-summary">Summary: {{ video['summary'] }}</p>
                 </li>
             {% endfor %}
         </ul>
