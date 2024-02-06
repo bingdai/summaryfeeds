@@ -66,6 +66,23 @@ h2 {
     text-transform: uppercase; /* Optional: style preference */
 }
 
+h2.date-header {
+    font-family: 'Montserrat', sans-serif; /* A more distinctive font */
+    font-size: 22px; /* Larger font size for emphasis */
+    color: #2c3e50; /* A deeper color for better visibility */
+    background-color: #ecf0f1; /* A subtle background color to make the date stand out */
+    padding: 10px 20px; /* Padding to create more space around the text */
+    margin-top: 100px; /* Increased top margin to separate from previous content */
+    margin-bottom: 20px; /* Space before the video list starts */
+    border-radius: 5px; /* Rounded corners for a modern look */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* A light shadow for depth */
+    width: fit-content; /* Only as wide as its content */
+    margin-left: auto; /* Center the date header */
+    margin-right: auto; /* Center the date header */
+}
+
+
+
 .email-container {
     margin-top: auto;
     width: 100%;
