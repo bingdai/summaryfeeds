@@ -13,7 +13,7 @@ class YouTubeService:
         self.api_key = api_key
 
     # get_latest_videos() method
-    def get_latest_videos(self, playlist_id, limit=3):
+    def get_latest_videos(self, playlist_id, limit=5):
         url = f"{self.BASE_URL}/playlistItems"
         params = {
             'part': 'snippet,contentDetails',
