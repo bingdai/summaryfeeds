@@ -90,7 +90,25 @@ li {
     transition: transform 0.2s; /* Smooth transition for hover effect */
 }
 
-/* ... rest of your CSS ... */
+.channel-info {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the channel info horizontally */
+    margin-bottom: 8px; /* Adds some space between the channel info and the video title */
+}
+
+.channel-logo {
+    width: 30px; /* Adjusts the size of the logo */
+    height: 30px; /* Keeps the logo aspect ratio square */
+    border-radius: 50%; /* Makes the logo circular */
+    margin-right: 10px; /* Adds some space between the logo and the channel name */
+    object-fit: cover; /* Ensures the logo covers the area without distorting */
+}
+
+.channel-name {
+    font-size: 14px; /* Smaller font size for subtlety */
+    color: #666; /* Darker color for better readability without drawing too much attention */
+}
 
 li a {
     color: #2a6496;
