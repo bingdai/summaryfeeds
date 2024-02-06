@@ -122,11 +122,14 @@ li a {
     width: 100%; /* Ensures the link occupies the full width for better clickability */
     text-align: center; /* Center-align the text of the anchor tag */
     margin-bottom: 10px; /* Optional: Adds some space between the title and the summary */
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+
 }
 
 li a:hover {
     color: #1d4d70;
-    transform: translateY(-1px); /* Slight lift effect on hover */
+    text-decoration: underline;
+    text-decoration-color: #1d4d70; /* Ensures the underline color matches the text */
 }
 
 @media only screen and (max-width: 768px) {
