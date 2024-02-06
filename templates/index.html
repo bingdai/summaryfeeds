@@ -10,8 +10,8 @@
             {% for video in videos %}
                 <li>
                     <a href="https://www.youtube.com/watch?v={{ video['video_id'] }}">{{ video['title'] }}</a>
-                    <p class="video-summary">Summary: {{ video['summary'] }}</p>
-                </li>
+                <p class="video-summary">{{ video['summary'] }}</p>
+            </li>
             {% endfor %}
         </ul>
     {% endfor %}
