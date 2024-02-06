@@ -61,5 +61,5 @@ if __name__ == "__main__":
     youtube_service = YouTubeService(api_key=api_key)
 
     # Test get_video_info() method
-    video_info = youtube_service.get_video_info(video_id='j48Z7dqBcWM')  # Replace VIDEO_ID with an actual video ID
+    video_info = youtube_service.get_video_info(video_id='VIDEO_ID')  # Replace VIDEO_ID with an actual video ID for testing purpose
     print(video_info)
