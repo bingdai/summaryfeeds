@@ -11,6 +11,7 @@ class VideoFetcher:
         channels = Channel.query.all()
         
         for channel in channels:
+            print(f"Fetching videos for channel {channel.channel_id}")
             playlist_id = 'UU' + channel.channel_id[2:]
             videos_response = self.youtube_service.get_latest_videos(playlist_id)
 
