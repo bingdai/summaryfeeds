@@ -11,10 +11,11 @@ This is an open-source project that uses the YouTube Transcript API and OpenAI's
 * Presents summaries in an easily readable format.
 * Organized interface to browse video summaries by date.
 
-## Getting Started
+## Getting Started to Run Your Own Summary Feeds
 
 ### Prerequisites
-* Python 3.6 or higher
+* Python 3.8 or higher
+* An OpenAI API key
 * PostgreSQL
 * An AWS account (for Elastic Beanstalk deployment)
 
