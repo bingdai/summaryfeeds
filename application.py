@@ -34,25 +34,25 @@ def inject_ga_id():
 
 @application.route('/')
 def index():
-    # Extend the query to also select channel information
+    # Extend the query to also select channel information and order videos correctly
     video_summary_query = db.session.query(
-        Video.video_id,
-        Video.title,
-        func.to_char(Video.published_at, 'YYYY-MM-DD').label('published_at_str'),
-        Video.published_at,
-        VideoSummary.summary,
-        Channel.channel_title,
-        Channel.channel_logo_url,  
+        Video.video_id,  # Selecting video ID
+        Video.title,  # Selecting video title
+        func.to_char(Video.published_at, 'YYYY-MM-DD').label('published_at_str'),  # Converting the publication date to string format for display
+        Video.published_at,  # Also selecting the publication date as a datetime object for accurate sorting
+        VideoSummary.summary,  # Selecting the summary of the video
+        Channel.channel_title,  # Selecting the title of the channel
+        Channel.channel_logo_url,  # Selecting the URL for the channel's logo
         func.rank().over(
             partition_by=Video.video_id,
             order_by=VideoSummary.retrieved_at.desc()
-        ).label('rank')
+        ).label('rank')  # Ranking summaries by retrieval date, descending, to identify the latest summary per video
     ).join(Channel, Video.channel_id == Channel.channel_id) \
     .join(VideoSummary, Video.video_id == VideoSummary.video_id) \
     .filter(Channel.featured == True) \
-    .subquery()
+    .subquery()  # Making this a subquery to use its results in the outer query
 
-    # Fetch the latest summaries
+    # Fetch the latest summaries using the ranked subquery
     latest_summaries = db.session.query(
         video_summary_query.c.video_id,
         video_summary_query.c.title,
@@ -62,20 +62,20 @@ def index():
         video_summary_query.c.channel_logo_url
     ).filter(video_summary_query.c.rank == 1) \
     .order_by(video_summary_query.c.published_at.desc()) \
-    .all()
+    .all()  # Ordering by the actual publication date (datetime) ensures correct chronological order. Fetching all matching records.
 
-    # Adjust the structure to include channel info
+    # Adjust the structure to include channel info in the response
     daily_videos = defaultdict(list)
-    for video_id, title, published_at, summary, channel_title, channel_logo_url in latest_summaries:
-        daily_videos[published_at].append({
+    for video_id, title, published_at_str, summary, channel_title, channel_logo_url in latest_summaries:
+        daily_videos[published_at_str].append({
             'video_id': video_id,
             'title': title,
-            'published_at': published_at,
+            'published_at': published_at_str,  # Using string-formatted date for display
             'summary': summary,
             'channel_title': channel_title,
-            'channel_logo_url': channel_logo_url
+            'channel_logo_url': channel_logo_url  # Including channel information for display
         })
-
+        
     return render_template('index.html', daily_videos=daily_videos)
 
 @application.route('/admin')
