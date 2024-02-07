@@ -5,6 +5,12 @@ Read AI-Focused Videos like a Daily News Feed
 ## About
 This is an open-source project that uses the YouTube Transcript API and OpenAI's GPT3.5-turbo-16k to fetch and summarize video transcripts. The project is built with a tech stack that includes HTML, CSS, Jinja2, Python (Flask), PostgreSQL, and is deployed on AWS Elastic Beanstalk.
 
+## Features
+* Fetches transcripts of AI-focused YouTube videos, using the YouTube Transcript API by pypi.org ([link](https://pypi.org/project/youtube-transcript-api/)).
+* Uses OpenAI's GPT-3.5-turbo-16k to summarize video transcripts.
+* Presents summaries in an easily readable format.
+* Organized interface to browse video summaries by date.
+
 ## Getting Started
 
 ### Prerequisites
