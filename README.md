@@ -10,5 +10,13 @@ You are welcome to use, modify, and distribute the code, for both private and co
 
 
 ## Get in Touch with Bing
-1. Email me at bingdai9 at gmail dot come
+1. Email me at bingdai9 at gmail dot com
 2. Grab coffee in Vancouver, Canada
+
+
+## Acknowledgement
+* YouTube Transcript API by pypi.org ([link](https://pypi.org/project/youtube-transcript-api/))
+* Google Cloud's YouTube Data API ([link](https://developers.google.com/youtube/v3))
+* OpenAI's GPT3.5-turbo-16k ([link](https://platform.openai.com/docs/models/gpt-3-5-turbo)
+* Python Community's amazing backend stack (mainly [Flask](https://flask.palletsprojects.com/en/3.0.x/)https://flask.palletsprojects.com/en/3.0.x/ and [SQLAlchemy](https://www.sqlalchemy.org/)https://www.sqlalchemy.org/)
+* PostgreSQL Database ([link](https://www.postgresql.org/)https://www.postgresql.org/)
