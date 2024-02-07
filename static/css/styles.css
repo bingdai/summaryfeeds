@@ -20,7 +20,7 @@ body {
 .tagline {
     font-size: 24px; /* Adjusted for visibility */
     text-align: center;
-    margin-bottom: 50px; /* Space before listing channels */
+    margin-bottom: 30px; /* Space before listing channels */
     color: #555; /* Subtle, professional color */
     font-weight: bold;
 }
@@ -51,7 +51,7 @@ h1, h2, .email-container {
 h1 {
     font-family: 'Bitter', serif;
     font-size: 36px; /* Increased font size */
-    margin-bottom: 20px; /* Increased margin */
+    margin-bottom: 10px; /* Increased margin */
     text-align: center;
     color: #222; /* Darker color for headline */
 }
@@ -72,7 +72,7 @@ h2.date-header {
     color: #2c3e50; /* A deeper color for better visibility */
     background-color: #ecf0f1; /* A subtle background color to make the date stand out */
     padding: 10px 20px; /* Padding to create more space around the text */
-    margin-top: 100px; /* Increased top margin to separate from previous content */
+    margin-top: 60px; /* Increased top margin to separate from previous content */
     margin-bottom: 20px; /* Space before the video list starts */
     border-radius: 5px; /* Rounded corners for a modern look */
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* A light shadow for depth */
@@ -193,4 +193,31 @@ li a:hover {
 
 .no-summary {
     color: red;
+}
+
+.source-code-container {
+    text-align: center; /* This centers the content */
+    width: 100%; /* Takes the full width to ensure centering works */
+    margin: 20px 0; /* Adds some vertical space around the source code link */
+}
+
+.source-code-link {
+    text-align: center; /* Center aligns the link */
+    margin-top: 20px; /* Adds some space between the tagline and the link */
+}
+
+.source-code-link a {
+    color: #3498db; /* Sets the link color */
+    font-size: 18px; /* Sets the font size */
+    text-decoration: none; /* Removes underline from the link */
+    border: 2px solid #3498db; /* Adds a border to make it look like a button */
+    padding: 10px 20px; /* Adds padding inside the border */
+    border-radius: 5px; /* Rounds the corners of the border */
+    transition: background-color 0.3s, color 0.3s; /* Adds a smooth color transition effect on hover */
+}
+
+.source-code-link a:hover, .source-code-link a:focus {
+    background-color: #3498db; /* Changes background color on hover/focus */
+    color: #ffffff; /* Changes text color on hover/focus */
+    text-decoration: none; /* Ensures the text decoration does not reappear on hover/focus */
 }

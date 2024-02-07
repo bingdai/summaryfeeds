@@ -3,6 +3,9 @@
 {% block content %}
 <div class="content">
     <div class="tagline">Read AI-Focused Videos like a Daily News Feed</div>
+    <div class="source-code-container">
+        <a href="https://github.com/bingdai/summaryfeeds" class="source-code-link">Source Code</a>
+    </div>
     <div class="tagline-divider"></div>
     {% for date, videos in daily_videos.items() %}
         <h2 class="date-header">{{ date }}</h2>
