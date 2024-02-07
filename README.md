@@ -1,3 +1,2 @@
-# summaryfeeds
-
-Repo for Summary Feeds (https://www.summaryfeeds.com), a website that lists summaries of AI-related YouTube channels.
+# summaryfeeds (https://www.summaryfeeds.com)
+Read AI-Focused Videos like a Daily News Feed
