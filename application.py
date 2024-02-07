@@ -38,7 +38,8 @@ def index():
     video_summary_query = db.session.query(
         Video.video_id,
         Video.title,
-        func.to_char(Video.published_at, 'YYYY-MM-DD').label('published_at'),
+        func.to_char(Video.published_at, 'YYYY-MM-DD').label('published_at_str'),
+        Video.published_at,
         VideoSummary.summary,
         Channel.channel_title,
         Channel.channel_logo_url,  
@@ -55,7 +56,7 @@ def index():
     latest_summaries = db.session.query(
         video_summary_query.c.video_id,
         video_summary_query.c.title,
-        video_summary_query.c.published_at,
+        video_summary_query.c.published_at_str,
         video_summary_query.c.summary,
         video_summary_query.c.channel_title,
         video_summary_query.c.channel_logo_url
