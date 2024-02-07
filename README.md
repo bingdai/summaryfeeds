@@ -21,11 +21,11 @@ This is an open-source project that uses the YouTube Transcript API and OpenAI's
 
 ### Installation Steps (work in progres...)
 1. Clone the repository:
-```git clone https://github.com/bingdai/summaryfeeds```
-```cd summaryfeeds```
+  ```git clone https://github.com/bingdai/summaryfeeds```
+  ```cd summaryfeeds```
 
 2. Install the required Python packages:
-```pip install -r requirements.txt```
+  ```pip install -r requirements.txt```
 
 3. Set up your PostgreSQL database and note your database credentials.
 4. Get an OpenAI API key.
