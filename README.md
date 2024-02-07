@@ -12,12 +12,12 @@ This is an open-source project that uses the YouTube Transcript API and OpenAI's
 * PostgreSQL
 * An AWS account (for Elastic Beanstalk deployment)
 
-*** Installation Steps (work in progres...)
-Clone the repository:
-`git clone https://github.com/bingdai/summaryfeeds`
+### Installation Steps (work in progres...)
+1. Clone the repository:
+```git clone https://github.com/bingdai/summaryfeeds```
 
-Install the required Python packages:
-`pip install -r requirements.txt`
+2. Install the required Python packages:
+```pip install -r requirements.txt```
 
 
 ## License (MIT)
