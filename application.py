@@ -85,7 +85,7 @@ def admin():
         return redirect(url_for('admin_login'))
 
     # Fetch featured channels and their videos
-    featured_channels = Channel.query.all()
+    featured_channels = Channel.query.filter_by(featured=True).all()
     featured_videos = {}
 
     for channel in featured_channels:
