@@ -87,7 +87,6 @@ def admin():
     featured_channels = Channel.query.all()
     featured_videos = {}
     for channel in featured_channels:
-        videos = Video.query.filter_by(channel_id=channel.channel_id).all()
         videos = Video.query.filter_by(channel_id=channel.channel_id).order_by(Video.published_at.desc()).all()
         featured_videos[channel.channel_title] = [{'id': video.video_id, 'title': video.title} for video in videos]
     
