@@ -84,14 +84,12 @@ def admin():
         return redirect(url_for('admin_login'))
 
     # Fetch featured channels and their videos
-    featured_channels = Channel.query.filter_by(featured=True).all()
+    featured_channels = Channel.query.all()
     featured_videos = {}
     for channel in featured_channels:
-        playlist_id = 'UU' + channel.channel_id[2:]
-        videos_response = youtube_service.get_latest_videos(playlist_id)
-        if videos_response and 'items' in videos_response:
-            videos = videos_response['items']
-            featured_videos[channel.channel_title] = [{'id': video['contentDetails']['videoId'], 'title': video['snippet']['title']} for video in videos]
+        videos = Video.query.filter_by(channel_id=channel.channel_id).all()
+        videos = Video.query.filter_by(channel_id=channel.channel_id).order_by(Video.published_at.desc()).all()
+        featured_videos[channel.channel_title] = [{'id': video.video_id, 'title': video.title} for video in videos]
     
     return render_template('admin.html', featured_videos=featured_videos)    
 
