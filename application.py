@@ -94,7 +94,11 @@ def admin():
             .all()
         )
         featured_videos[channel.channel_title] = [
-            {'id': video.video_id, 'title': video.title}
+            {
+                'id': video.video_id, 
+                'title': video.title,
+                'published_at': video.published_at
+            }
             for video in videos
         ]
     

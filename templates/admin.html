@@ -17,6 +17,7 @@
         <ul>
         {% for video in videos %}
             <li>
+                {{ video.published_at }}
                 {{ video.title }}
                 <!-- Fetch Transcript Button -->
                 <form action="{{ url_for('fetch_transcript', video_id=video.id) }}" method="post" style="display: inline;">
