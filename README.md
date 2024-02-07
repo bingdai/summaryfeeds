@@ -1,17 +1,28 @@
 # Summary Feeds (www.summaryfeeds.com)
 Read AI-Focused Videos like a Daily News Feed
 
+
 ## About
 This is an open-source project that uses the YouTube Transcript API and OpenAI's GPT3.5-turbo-16k to fetch and summarize video transcripts. The project is built with a tech stack that includes HTML, CSS, Jinja2, Python (Flask), PostgreSQL, and is deployed on AWS Elastic Beanstalk.
+
+## Getting Started
+
+### Prerequisites
+* Python 3.6 or higher
+* PostgreSQL
+* An AWS account (for Elastic Beanstalk deployment)
+
+*** Installation Steps (work in progres...)
+Clone the repository:
+`git clone https://github.com/bingdai/summaryfeeds`
+
+Install the required Python packages:
+`pip install -r requirements.txt`
+
 
 ## License (MIT)
 
 You are welcome to use, modify, and distribute the code, for both private and commercial use, provided that the license is included with the software ([LICENSE](https://github.com/bingdai/summaryfeeds/blob/main/LICENSE)).
-
-
-## Get in Touch with Bing
-1. Email me at bingdai9 at gmail dot com
-2. Grab coffee in Vancouver, Canada
 
 
 ## Acknowledgement
@@ -20,3 +31,8 @@ You are welcome to use, modify, and distribute the code, for both private and co
 * OpenAI's GPT3.5-turbo-16k ([link](https://platform.openai.com/docs/models/gpt-3-5-turbo)
 * Python Community's amazing backend stack (mainly [Flask](https://flask.palletsprojects.com/en/3.0.x/) and [SQLAlchemy](https://www.sqlalchemy.org/))
 * PostgreSQL Database ([link](https://www.postgresql.org/))
+
+
+## Get in Touch with Bing
+1. Email me at bingdai9 at gmail dot com
+2. Grab coffee in Vancouver, Canada
