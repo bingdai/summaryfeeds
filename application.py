@@ -119,12 +119,12 @@ def admin_update():
     # Placeholder for update process
     return 'Update process started'
 
-@application.route('/admin/fetch_transcript', methods=['POST'])
-def fetch_transcript():
+@application.route('/admin/fetch_transcript/<video_id>', methods=['POST'])
+def fetch_transcript(video_id):
     if not session.get('logged_in'):
         return redirect(url_for('admin_login'))
     
-    video_id = request.form.get('video_id')
+    #video_id = request.form.get('video_id')
 
     if video_id:
         transcript_service = TranscriptService()
