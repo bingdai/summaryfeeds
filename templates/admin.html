@@ -18,7 +18,7 @@
         {% for video in videos %}
             <li>
                 {{ video.published_at }}
-                {{ video.title }}
+                <p class="{{ 'no-summary' if not video.summary_exists else '' }}">{{ video.title }}</p>
                 <!-- Fetch Transcript Button -->
                 <form action="{{ url_for('fetch_transcript', video_id=video.id) }}" method="post" style="display: inline;">
                     <input type="submit" value="Fetch Transcript">

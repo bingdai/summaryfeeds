@@ -9,6 +9,7 @@ from database.models.channel import Channel
 from services.summary_generator import SummaryGenerator
 from config import Config
 from database.connection import init_db, db
+from sqlalchemy.sql import exists
 from datetime import datetime
 import pytz
 import os
@@ -78,6 +79,7 @@ def index():
     return render_template('index.html', daily_videos=daily_videos)
 
 @application.route('/admin')
+
 def admin():
     if not session.get('logged_in'):
         return redirect(url_for('admin_login'))
@@ -85,23 +87,26 @@ def admin():
     # Fetch featured channels and their videos
     featured_channels = Channel.query.all()
     featured_videos = {}
+
     for channel in featured_channels:
-        videos = (
-            Video.query
-            .filter_by(channel_id=channel.channel_id)
-            .order_by(Video.published_at.desc())
-            .all()
-        )
-        featured_videos[channel.channel_title] = [
-            {
+        videos = (Video.query
+                  .filter_by(channel_id=channel.channel_id)
+                  .order_by(Video.published_at.desc())
+                  .all())
+
+        for video in videos:
+            summary_exists = (db.session.query(exists()
+                              .where(VideoSummary.video_id == video.video_id))
+                              .scalar())
+            featured_videos.setdefault(channel.channel_title, []).append({
                 'id': video.video_id, 
                 'title': video.title,
-                'published_at': video.published_at
-            }
-            for video in videos
-        ]
+                'published_at': video.published_at,
+                'summary_exists': summary_exists
+            })
     
     return render_template('admin.html', featured_videos=featured_videos)    
+
 
 @application.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():

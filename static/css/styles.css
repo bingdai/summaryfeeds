@@ -190,3 +190,7 @@ li a:hover {
     margin-top: 10px;
     text-align: left; /* Left-align the summary */
 }
+
+.no-summary {
+    color: red;
+}
