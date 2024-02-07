@@ -9,7 +9,6 @@ from database.models.channel import Channel
 from services.summary_generator import SummaryGenerator
 from config import Config
 from database.connection import init_db, db
-from database.models.channel import Channel
 from datetime import datetime
 import pytz
 import os
