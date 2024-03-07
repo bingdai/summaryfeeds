@@ -1,4 +1,4 @@
-# Summary Feeds (www.summaryfeeds.com)
+# Summary Feeds (http://www.summaryfeeds.com)
 Read AI-Focused Videos like a Daily News Feed
 
 
